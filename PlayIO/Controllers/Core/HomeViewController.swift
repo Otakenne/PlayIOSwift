@@ -251,7 +251,7 @@ extension HomeViewController: UICollectionViewDataSource {
             NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .absolute(80)),
+                    heightDimension: .absolute(90)),
                 elementKind: UICollectionView.elementKindSectionHeader,
                 alignment: .top
             )
@@ -390,7 +390,8 @@ extension HomeViewController: UICollectionViewDelegate {
             playlistViewController.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(playlistViewController, animated: true)
         case .recommendedTracks:
-            break
+            let track = tracks[indexPath.row]
+            PlaybackPresenter.shared.startPlayback(from: self, track: track)
         }
     }
     

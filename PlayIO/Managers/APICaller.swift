@@ -182,4 +182,85 @@ final class APICaller {
             task.resume()
         }
     }
+    
+    public func getCategories(completion: @escaping (Result<[Category], Error>) -> Void) {
+        createRequest(with: URL(string: "\(Constants.baseURL)/browse/categories?limit=50"), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+                
+                do {
+                    let result = try JSONDecoder().decode(AllCategoriesResponse.self, from: data)
+                    completion(.success(result.categories.items))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            
+            task.resume()
+        }
+    }
+    
+    public func getCategoryPlaylists(category: Category, completion: @escaping (Result<[Playlist], Error>) -> Void) {
+        createRequest(with: URL(string: "\(Constants.baseURL)/browse/categories/\(category.id)/playlists?limit=50"), type: .GET) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+                
+                do {
+                    let result = try JSONDecoder().decode(FeaturedPlaylistResponse.self, from: data)
+                    let playlists = result.playlists.items
+                    completion(.success(playlists))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            
+            task.resume()
+        }
+    }
+    
+    public func search(query: String, completion: @escaping (Result<[SearchResult], Error>) -> Void) {
+        let encoddedQueryString = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        createRequest(with: URL(
+            string: "\(Constants.baseURL)/search?limit=10&q=\(encoddedQueryString)&type=album,artist,playlist,track"),
+            type: .GET
+        ) { request in
+            print(request.url?.absoluteString ?? "none")
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+                
+                do {
+                    let result = try JSONDecoder().decode(SearchResultResponse.self, from: data)
+                    
+                    var searchResult: [SearchResult] = []
+                    searchResult.append(contentsOf: result.albums.items.compactMap({ album in
+                            .album(model: album)
+                    }))
+                    searchResult.append(contentsOf: result.artists.items.compactMap({ artist in
+                            .artist(model: artist)
+                    }))
+                    searchResult.append(contentsOf: result.playlists.items.compactMap({ playlist in
+                            .playlist(model: playlist)
+                    }))
+                    searchResult.append(contentsOf: result.tracks.items.compactMap({ track in
+                            .track(model: track)
+                    }))
+                    
+                    completion(.success(searchResult))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            
+            task.resume()
+        }
+    }
 }

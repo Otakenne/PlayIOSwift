@@ -49,14 +49,14 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     
     let playAllButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemGreen
+        button.backgroundColor = UIColor.getColor(colorHex: "#E2374D")
         let image = UIImage(
             systemName: "play.fill",
             withConfiguration: UIImage.SymbolConfiguration(
                 pointSize: 30,
                 weight: .regular
             )
-        )
+        )?.withTintColor(.systemBackground, renderingMode: .alwaysOriginal)
         button.setImage(image, for: .normal)
         button.tintColor = .white
         button.layer.cornerRadius = 25

@@ -32,7 +32,7 @@ class TitleHeaderCollectionReusableView: UICollectionReusableView {
         
         titleLabel.frame = CGRect(
             x: 15,
-            y: height - 30,
+            y: height - 40,
             width: width - 10,
             height: 20
         )
