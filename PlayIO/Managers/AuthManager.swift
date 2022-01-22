@@ -187,4 +187,11 @@ final class AuthManager {
             UserDefaults.standard.set(refreshToken, forKey: "refresh_token")
         }
     }
+    
+    func signOut(completion: (Bool) -> ()) {
+        UserDefaults.standard.set(nil, forKey: "access_token")
+        UserDefaults.standard.set(nil, forKey: "expiration")
+        UserDefaults.standard.set(nil, forKey: "refresh_token")
+        completion(true)
+    }
 }

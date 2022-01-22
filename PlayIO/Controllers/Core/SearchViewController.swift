@@ -149,6 +149,7 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: SearchResultsViewControllerDelegate {
     func didTapResult(_ result: SearchResult) {
         var controller: UIViewController
+        HapticsManager.shared.vibrateForSelection()
         switch result {
         case .album(let model):
             controller = AlbumViewController(album: model)

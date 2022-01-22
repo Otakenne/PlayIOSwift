@@ -57,6 +57,7 @@ class HomeViewController: UIViewController {
         configureCollectionView()
         view.addSubview(loader)
         fetchData()
+        addLongTapGesture()
     }
     
     override func viewDidLayoutSubviews() {
@@ -148,6 +149,44 @@ class HomeViewController: UIViewController {
                   
             self.configureModels(newAlbums: newAlbums, playlists: playlists, tracks: tracks)
         }
+    }
+    
+    private func addLongTapGesture() {
+        collectionView.addGestureRecognizer(UILongPressGestureRecognizer (target: self, action: #selector(didLongPress(_:))))
+    }
+    
+    @objc func didLongPress(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else {
+            return
+        }
+        
+        let touchPoint = gesture.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: touchPoint),
+                indexPath.section == 2 else {
+            return
+        }
+        
+        let track = tracks[indexPath.row]
+        
+        let actionSheet = UIAlertController(
+            title: track.name,
+            message: "Add this song to playlist",
+            preferredStyle: .actionSheet
+        )
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Add to playlist", style: .default, handler: { [weak self] _ in
+            DispatchQueue.main.async {
+                let vc = LibraryPlaylistsViewController()
+                vc.selectionHandler = { playlist in
+                    APICaller.shared.addTrackToPlaylist(track: track, playlist: playlist) { success in
+                        
+                    }
+                }
+                vc.title = "Select Playlist"
+                self?.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+            }
+        }))
     }
     
     private func configureModels(newAlbums: [Album], playlists: [Playlist], tracks: [AudioTrack]) {
@@ -375,6 +414,7 @@ extension HomeViewController: UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
         
         let section = sections[indexPath.section]
+        HapticsManager.shared.vibrateForSelection()
         
         switch section {
         case .newReleases:

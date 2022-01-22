@@ -171,6 +171,7 @@ extension PlaylistViewController: UICollectionViewDataSource {
 extension PlaylistViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        HapticsManager.shared.vibrateForSelection()
         let track = tracks[indexPath.row]
         PlaybackPresenter.shared.startPlayback(from: self, track: track)
     }
