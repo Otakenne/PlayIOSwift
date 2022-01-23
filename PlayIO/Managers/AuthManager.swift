@@ -17,7 +17,7 @@ final class AuthManager {
     
     public var signInURL: URL? {
         let base = "https://accounts.spotify.com/authorize"
-        let string = "\(base)?response_type=code&client_id=\(Constants.clientID)&scopes=\(Constants.scopes)&redirect_uri=\(Constants.redirectURI)&show_dialog=TRUE"
+        let string = "\(base)?response_type=code&client_id=\(Constants.clientID)&scope=\(Constants.scopes)&redirect_uri=\(Constants.redirectURI)&show_dialog=TRUE"
         return URL(string: string )
     }
     

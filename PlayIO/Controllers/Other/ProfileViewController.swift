@@ -51,10 +51,11 @@ class ProfileViewController: UIViewController {
     
     private func updateUI(with model: UserProfile) {
         tableView.isHidden = false
-        models.append("Full Name: \(model.display_name)")
-        models.append("Email Address: \(model.email)")
-        models.append("User ID: \(model.id)")
-        models.append("Plan: \(model.products)")
+        let none = "None"
+        models.append("Full Name: \(model.display_name ?? none)")
+        models.append("Email Address: \(model.email ?? none)")
+//        models.append("User ID: \(model.id ?? none)")
+        models.append("Plan: \(model.product ?? none)")
         createTableViewHeader(with: model.images?.first?.url)
         tableView.reloadData()
     }

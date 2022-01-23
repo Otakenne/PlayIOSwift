@@ -51,8 +51,11 @@ final class APICaller {
                 
                 do {
                     let result = try JSONDecoder().decode(UserProfile.self, from: data)
+//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+//                    print(result)
                     completion(.success(result))
                 } catch {
+//                    print(error)
                     completion(.failure(error))
                 }
             }
@@ -274,7 +277,6 @@ final class APICaller {
                 
                 do {
                     let result = try JSONDecoder().decode(LibraryPlaylistResponse.self, from: data)
-//                    print("Results : \(result)")
                     let playlists = result.items
                     completion(.success(playlists))
                 } catch {
@@ -320,14 +322,14 @@ final class APICaller {
                 }
 
             case .failure(_):
-                break
+                completion(false)
             }
         }
 
     }
     
     public func addTrackToPlaylist(track: AudioTrack, playlist: Playlist, completion: @escaping (Bool) -> Void) {
-        createRequest(with: URL(string: "\(Constants.baseURL)/playlists/\(playlist.id)/track"), type: .POST) { bodyRequest in
+        createRequest(with: URL(string: "\(Constants.baseURL)/playlists/\(playlist.id)/tracks"), type: .POST) { bodyRequest in
             var request = bodyRequest
             let json = [
                 "uris": [
@@ -353,6 +355,7 @@ final class APICaller {
                     }
                     
                 } catch {
+                    print(error)
                     completion(false)
                 }
             }

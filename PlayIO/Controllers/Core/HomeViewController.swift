@@ -187,6 +187,8 @@ class HomeViewController: UIViewController {
                 self?.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
             }
         }))
+        
+        present(actionSheet, animated: true)
     }
     
     private func configureModels(newAlbums: [Album], playlists: [Playlist], tracks: [AudioTrack]) {
