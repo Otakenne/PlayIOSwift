@@ -12,9 +12,9 @@ It's written in Swift and follows a clean easily maintainable architecture. It f
 - Shimmer loading effect
 
 ## Screenshots
-<img src="https://github.com/Otakenne/PlayIOSwift/blob/main/Simulator%20Screen%20Shot%20-%20iPhone%2013%20mini%20-%202022-02-05%20at%2009.42.37.png" width="200">            
+<img src="https://github.com/Otakenne/PlayIOSwift/blob/main/Simulator%20Screen%20Shot%20-%20iPhone%2013%20mini%20-%202022-02-05%20at%2010.32.07.png" width="200">                              <img src="https://github.com/Otakenne/PlayIOSwift/blob/main/Simulator%20Screen%20Shot%20-%20iPhone%2013%20mini%20-%202022-02-05%20at%2010.32.24.png" width="200">                             <img src="https://github.com/Otakenne/PlayIOSwift/blob/main/Simulator%20Screen%20Shot%20-%20iPhone%2013%20mini%20-%202022-02-05%20at%2010.32.37.png" width="200">                             <img src="https://github.com/Otakenne/PlayIOSwift/blob/main/Simulator%20Screen%20Shot%20-%20iPhone%2013%20mini%20-%202022-02-05%20at%2010.32.54.png" width="200">            
 
-<img src="https://github.com/Otakenne/PlayIOSwift/blob/main/Simulator%20Screen%20Shot%20-%20iPhone%2013%20mini%20-%202022-02-05%20at%2009.42.42.png" width="200">            
+<img src="https://github.com/Otakenne/PlayIOSwift/blob/main/Simulator%20Screen%20Shot%20-%20iPhone%2013%20mini%20-%202022-02-05%20at%2010.32.15.png" width="200">                              <img src="https://github.com/Otakenne/PlayIOSwift/blob/main/Simulator%20Screen%20Shot%20-%20iPhone%2013%20mini%20-%202022-02-05%20at%2010.32.28.png" width="200">                             <img src="https://github.com/Otakenne/PlayIOSwift/blob/main/Simulator%20Screen%20Shot%20-%20iPhone%2013%20mini%20-%202022-02-05%20at%2010.32.39.png" width="200">                             <img src="https://github.com/Otakenne/PlayIOSwift/blob/main/Simulator%20Screen%20Shot%20-%20iPhone%2013%20mini%20-%202022-02-05%20at%2010.32.55.png" width="200">           
 
 ## Badges
 
